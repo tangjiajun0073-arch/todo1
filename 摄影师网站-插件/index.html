@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elena Moreau — Fine Art & Editorial Photography">
+  <title>Elena Moreau — Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FCFAF7;
+      --bg-warm: #F4F0EA;
+      --bg-dark: #1A1816;
+      --text-primary: #1A1816;
+      --text-muted: #7A736B;
+      --text-light: #E8E3DA;
+      --accent: #C25A3C;
+      --accent-warm: #D4A853;
+      --accent-subtle: #E8DDD0;
+      --border: #E5DFD6;
+      --border-dark: #2E2B28;
+      --transition-slow: 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+      --transition-medium: 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+      --transition-fast: 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3, h4, .serif {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .section-number {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition-medium);
+      mix-blend-mode: difference;
+      color: #fff;
+    }
+
+    .header.scrolled {
+      mix-blend-mode: normal;
+      color: var(--text-primary);
+      background: rgba(252, 250, 247, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .header-nav a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 4px;
+      transition: var(--transition-fast);
+    }
+
+    .header-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: var(--transition-medium);
+    }
+
+    .header-nav a:hover::after { width: 100%; }
+
+    .header-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+
+    .header-menu-btn span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: currentColor;
+      transition: var(--transition-medium);
+      transform-origin: center;
+    }
+
+    .header-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(2px, 2px); }
+    .header-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .header-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(2px, -2px); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-slow);
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: var(--transition-medium);
+      opacity: 0.7;
+    }
+
+    .mobile-menu a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: heroZoom 8s ease-out forwards;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.12); }
+      to { transform: scale(1); }
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,24,22,0.55) 0%, rgba(26,24,22,0.15) 40%, rgba(26,24,22,0.05) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 4rem;
+      padding-bottom: 3rem;
+      color: #fff;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s 0.3s both;
+    }
+
+    .hero-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      animation: fadeUp 1s 0.6s both;
+    }
+
+    .hero-subtitle .line {
+      width: 60px;
+      height: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .hero-subtitle span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 4rem;
+      z-index: 1;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1s both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); transform-origin: top; }
+      50% { transform: scaleY(0.3); transform-origin: top; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      padding: 8rem 4rem;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .gallery-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      max-width: 500px;
+    }
+
+    .gallery-categories {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .gallery-categories button {
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      transition: var(--transition-fast);
+      position: relative;
+    }
+
+    .gallery-categories button::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: var(--transition-medium);
+    }
+
+    .gallery-categories button.active { color: var(--text-primary); }
+    .gallery-categories button.active::after { width: 100%; }
+    .gallery-categories button:hover { color: var(--text-primary); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 320px;
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-warm);
+    }
+
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,24,22,0.55) 0%, rgba(26,24,22,0.05) 50%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      opacity: 0;
+      transition: var(--transition-medium);
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-info h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .gallery-item-info span {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── FEATURED ── */
+    .featured-section {
+      padding: 8rem 4rem;
+      background: var(--bg-warm);
+    }
+
+    .featured-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .featured-image {
+      position: relative;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .featured-image::after {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: -1rem;
+      bottom: -1rem;
+      border: 1px solid var(--accent);
+      z-index: -1;
+    }
+
+    .featured-content h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .featured-content p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      max-width: 440px;
+    }
+
+    .featured-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid var(--accent);
+      transition: var(--transition-fast);
+    }
+
+    .featured-link:hover { gap: 1.25rem; color: var(--accent); }
+
+    .featured-link::after {
+      content: '→';
+      font-size: 1rem;
+      transition: var(--transition-fast);
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      padding: 8rem 4rem;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .about-text h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      max-width: 480px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .about-image blockquote {
+      position: absolute;
+      bottom: -2rem;
+      left: -2rem;
+      background: var(--bg-primary);
+      padding: 2rem;
+      max-width: 320px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    }
+
+    .about-image blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-image blockquote footer {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-style: normal;
+    }
+
+    /* ── SERVICES ── */
+    .services-section {
+      padding: 8rem 4rem;
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    .services-header {
+      margin-bottom: 4rem;
+    }
+
+    .services-header h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      max-width: 600px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 2rem;
+    }
+
+    .service-card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.4;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: rgba(232,227,218,0.6);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 8rem 4rem;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-section > p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 4px;
+      transition: var(--transition-fast);
+    }
+
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent);
+      transition: var(--transition-medium);
+    }
+
+    .contact-email:hover { color: var(--accent); }
+
+    .contact-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-social a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .contact-social a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * { opacity: 0; transform: translateY(30px); }
+    .reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.2s; }
+    .reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.3s; }
+    .reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.4s; }
+    .reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.5s; }
+    .reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.6s; }
+    .reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.7s; }
+    .reveal-stagger.revealed > * {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+                  transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .header { padding: 1.5rem 2rem; }
+      .header.scrolled { padding: 1rem 2rem; }
+      .header-nav { gap: 1.5rem; }
+
+      .gallery-section,
+      .featured-section,
+      .about-section,
+      .services-section,
+      .contact-section { padding: 5rem 2rem; }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 250px;
+      }
+
+      .gallery-item.wide { grid-column: span 1; }
+      .gallery-item.large { grid-column: span 2; }
+
+      .featured-layout { gap: 3rem; }
+      .about-layout { gap: 3rem; }
+
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid .service-card:last-child { grid-column: span 2; max-width: 50%; }
+
+      .hero-content { padding: 2rem; padding-bottom: 2rem; }
+      .hero-scroll { right: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .header-menu-btn { display: flex; }
+
+      .gallery-section,
+      .featured-section,
+      .about-section,
+      .services-section,
+      .contact-section { padding: 4rem 1.5rem; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 280px;
+        gap: 0.75rem;
+      }
+
+      .gallery-item.wide,
+      .gallery-item.tall,
+      .gallery-item.large {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .gallery-item-overlay { opacity: 1; }
+
+      .featured-layout,
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-image blockquote {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 1rem;
+        max-width: 100%;
+        box-shadow: none;
+        padding: 1.5rem 0 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .featured-image::after { display: none; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid .service-card:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+      }
+
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .about-stat-number { font-size: 2rem; }
+
+      .hero-content { padding: 1.5rem; padding-bottom: 1.5rem; }
+      .hero-scroll { right: 1.5rem; bottom: 1.5rem; }
+
+      .header { padding: 1.25rem 1.5rem; }
+      .header.scrolled { padding: 0.875rem 1.5rem; }
+
+      .footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+
+      .contact-social { gap: 1.25rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <a href="#" class="header-logo">E.M.</a>
+    <nav>
+      <ul class="header-nav">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#featured">Featured</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="header-menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <a href="#work" data-nav>Work</a>
+      <a href="#featured" data-nav>Featured</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#services" data-nav>Services</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg">
+        <img src="https://picsum.photos/id/1015/1920/1080" alt="Hero landscape" loading="eager">
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">Elena<br>Moreau</h1>
+        <div class="hero-subtitle">
+          <span class="line"></span>
+          <span>Fine Art & Editorial Photography</span>
+        </div>
+      </div>
+      <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section" id="work">
+      <div class="gallery-header reveal">
+        <div>
+          <span class="section-number">01</span>
+          <h2 class="gallery-title">Selected Works</h2>
+        </div>
+        <div class="gallery-categories">
+          <button class="active">All Work</button>
+          <button>Portrait</button>
+          <button>Landscape</button>
+          <button>Architecture</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid reveal-stagger">
+        <div class="gallery-item wide">
+          <img src="https://picsum.photos/id/116/900/600" alt="Urban Solitude" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Urban Solitude</h3>
+              <span>Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item tall">
+          <img src="https://picsum.photos/id/122/600/900" alt="Portraits of Silence" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Portraits of Silence</h3>
+              <span>Portrait</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://picsum.photos/id/29/600/400" alt="Golden Hour" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Golden Hour</h3>
+              <span>Landscape</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://picsum.photos/id/104/600/400" alt="Concrete Poetry" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Concrete Poetry</h3>
+              <span>Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item wide">
+          <img src="https://picsum.photos/id/169/900/500" alt="Tidal Rhythms" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Tidal Rhythms</h3>
+              <span>Nature</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item tall">
+          <img src="https://picsum.photos/id/36/600/900" alt="Faces of Florence" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Faces of Florence</h3>
+              <span>Portrait</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://picsum.photos/id/43/600/400" alt="Vertical Horizons" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Vertical Horizons</h3>
+              <span>Landscape</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://picsum.photos/id/96/600/400" alt="Shadow Play" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-info">
+              <h3>Shadow Play</h3>
+              <span>Fine Art</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="featured-section" id="featured">
+      <div class="featured-layout">
+        <div class="featured-image reveal">
+          <img src="https://picsum.photos/id/155/800/1067" alt="Featured project — Light Studies" loading="lazy">
+        </div>
+        <div class="featured-content reveal">
+          <span class="section-number">02</span>
+          <h2>Light Studies:<br>A Visual Essay</h2>
+          <p>A year-long exploration of natural light across the Mediterranean. From the sharp shadows of Santorini at noon to the golden haze of Amalfi at dusk, this series captures the ever-changing dialogue between architecture and sunlight.</p>
+          <a href="#" class="featured-link">View Full Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="about-layout">
+        <div class="about-text reveal">
+          <span class="section-number">03</span>
+          <h2>About the<br>Photographer</h2>
+          <p>Elena Moreau is a Paris-based photographer whose work explores the intersection of light, architecture, and human presence. With over a decade of experience in editorial and fine art photography, her images have graced the pages of leading publications worldwide.</p>
+          <p>Her approach combines classical composition with a contemporary sensibility — creating images that feel at once timeless and immediate. She is drawn to quiet moments, negative space, and the poetry found in everyday geometry.</p>
+          <div class="about-stats">
+            <div>
+              <div class="about-stat-number">12+</div>
+              <div class="about-stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="about-stat-number">40+</div>
+              <div class="about-stat-label">Publications</div>
+            </div>
+            <div>
+              <div class="about-stat-number">15</div>
+              <div class="about-stat-label">Exhibitions</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image reveal">
+          <img src="https://picsum.photos/id/64/600/800" alt="Elena Moreau" loading="lazy">
+          <blockquote>
+            <p>"Photography is the art of paying attention — of finding the extraordinary in what others pass by."</p>
+            <footer>Elena Moreau</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+      <div class="services-header reveal">
+        <span class="section-number" style="color:rgba(212,168,83,0.7)">04</span>
+        <h2>Services & Expertise</h2>
+      </div>
+      <div class="services-grid reveal-stagger">
+        <div class="service-card">
+          <div class="service-card-number">01</div>
+          <h3>Editorial</h3>
+          <p>Magazine features, fashion editorials, and visual storytelling for leading publications. Full creative direction from concept to final deliverables.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card-number">02</div>
+          <h3>Commercial</h3>
+          <p>Brand campaigns, architectural photography, and hospitality projects. Creating compelling visual narratives that elevate brand identity.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card-number">03</div>
+          <h3>Fine Art</h3>
+          <p>Limited edition prints, gallery exhibitions, and commissioned artworks. Each piece is meticulously crafted and printed on museum-grade archival paper.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section reveal" id="contact">
+      <span class="section-number">05</span>
+      <h2>Get in Touch</h2>
+      <p>Available for commissions, editorial assignments, and collaborations worldwide.</p>
+      <a href="mailto:hello@elenamoreau.com" class="contact-email">hello@elenamoreau.com</a>
+      <div class="contact-social">
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">VSCO</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>&copy; 2026 Elena Moreau. All rights reserved.</span>
+    <span>Paris, France</span>
+  </footer>
+
+  <script>
+    (function() {
+      const header = document.getElementById('header');
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const galleryButtons = document.querySelectorAll('.gallery-categories button');
+      const mobileLinks = document.querySelectorAll('[data-nav]');
+
+      /* ── HEADER SCROLL ── */
+      let lastScroll = 0;
+      function onScroll() {
+        const y = window.scrollY;
+        header.classList.toggle('scrolled', y > 80);
+        lastScroll = y;
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ── MOBILE MENU ── */
+      function closeMenu() {
+        menuBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.contains('active');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          menuBtn.classList.add('active');
+          mobileMenu.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      /* ── GALLERY FILTER ── */
+      galleryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          galleryButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      /* ── REVEAL ON SCROLL ── */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+        observer.observe(el);
+      });
+
+      /* ── SMOOTH SCROLL FOR ANCHOR LINKS ── */
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      /* ── INITIAL LOAD ── */
+      onScroll();
+
+      /* ── PARALLAX HERO ── */
+      const heroBg = document.querySelector('.hero-bg img');
+      if (heroBg) {
+        window.addEventListener('scroll', () => {
+          const scroll = window.scrollY;
+          if (scroll < window.innerHeight) {
+            const rate = scroll * 0.4;
+            heroBg.style.transform = `translate3d(0, ${rate}px, 0) scale(1)`;
+          }
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+</body>
+</html>

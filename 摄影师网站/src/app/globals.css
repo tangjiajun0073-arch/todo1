@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-accent: #c9a96e;
+  --color-accent-hover: #d4b87a;
+  --color-surface: #0d0d0d;
+  --color-surface-raised: #111;
+  --color-surface-input: #1a1a1a;
+  --color-text-primary: #fff;
+  --color-text-secondary: #ccc;
+  --color-text-muted: #aaa;
+  --color-text-dim: #888;
+  --color-text-subtle: #555;
+  --color-border-dim: #222;
+  --color-border-subtle: #1a1a1a;
+
+  --animate-fade-up: fade-up 0.8s ease-out forwards;
+  --animate-scroll-mouse: scroll-mouse 2s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scroll-mouse {
+  0%, 100% { top: 8px; opacity: 1; }
+  50% { top: 16px; opacity: 0.3; }
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #111;
+}
+
+body {
+  background: #0d0d0d;
+  color: #ccc;
+  overflow-x: hidden;
+}
+
+/* Hero radial gradient overlay — Tailwind can't express this */
+.hero-overlay {
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+}

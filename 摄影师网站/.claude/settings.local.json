@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npx vite *)",
+      "Bash(start *)",
+      "Read(//c/Users/iLoy/Desktop/todo//**)",
+      "Bash(npx create-next-app@latest photographer-tmp --typescript --tailwind --app --no-eslint --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(cp -r photographer-tmp/* photographer-tmp/.* 摄影师网站/)",
+      "Bash(rm -rf photographer-tmp)",
+      "Bash(cp -r photographer-tmp/* \"摄影师网站/\")",
+      "Bash(cp photographer-tmp/.gitignore \"摄影师网站/\")",
+      "Bash(npm run *)",
+      "Bash(npx next *)"
+    ]
+  }
+}
